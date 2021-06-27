@@ -1,0 +1,57 @@
+[tool.poetry]
+name = "test1.test2.test3"
+version = "0.0.1"
+description = "test"
+authors = ["test"]
+packages = [
+    {include="test1", from="src"}
+]
+include = ["*.conf", "py.typed"]
+
+[tool.poetry.dependencies]
+python = "^3.8"
+aiohttp = "3.7.4.post0"
+asyncpg = "0.23.0"
+
+[tool.poetry.dev-dependencies]
+pytest = "^6.1.2"
+pytest-asyncio = "^0.15."
+pytest-mypy = "^0.8.1"
+pytest-pylint = "^0.18.0"
+
+[tool.poetry.scripts]
+test-app = "test1.test2.test3.__main__:main"
+
+[tool.pytest.ini_options]
+addopts = "-p no:cacheprovider --verbose --pylint --pylint-rcfile=pyproject.toml --mypy"
+
+[tool.pylint.master]
+good-names = "logger,e,i,j,n,m,f,_"
+
+[tool.pylint.messages_control]
+disable = "all"
+enable = """,
+    unused-import,
+    fixme,
+    useless-object-inheritance,
+    unused-variable,
+    unused-argument,
+    unexpected-keyword-arg,
+    string,
+    unreachable,
+    invalid-name,
+    logging-format-interpolation,
+    logging-fstring-interpolation,
+    unnecessary-pass,
+    broad-except,
+    bare-except
+    """
+ignored_argument_names = "_.*|^ignored_|^unused_|args|kwargs"
+
+[tool.mypy]
+ignore_missing_imports = true
+# follow_imports = "skip"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
