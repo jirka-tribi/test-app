@@ -18,7 +18,7 @@ def event_loop(request):  # type: ignore
 
 
 @pytest.fixture(scope="session")
-def operators_api(event_loop: AbstractEventLoop):  # type: ignore
+def test_app(event_loop: AbstractEventLoop):  # type: ignore
 
     test_app = App(
         Database(AsyncMock()),
